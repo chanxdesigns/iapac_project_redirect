@@ -24,6 +24,8 @@ class RedirectController extends Controller
         $urlArray = explode("respid",$survey_link);
         $urlArray[0] = $urlArray[0].$uid;
         $survey_link = implode("",$urlArray);
+        var_dump($survey_link);
+        exit;
         return redirect()->away($survey_link);
     }
 }
