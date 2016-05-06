@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/survey/{projectid}/{vendor}/', 'RedirectController@redirect');
+Route::get('/survey/{projectid}/{vendor}/{country?}', 'RedirectController@redirect');
