@@ -12,6 +12,8 @@ class RedirectController extends Controller
 {
     //Make the redirect according to the Project ID and Vendor ID
     public function redirect ($projectid,$vendor,$country = "") {
+        var_dump($vendor);
+        exit();
 
         //Full Abbreviations Country
         $fcountry = "";
@@ -93,7 +95,9 @@ class RedirectController extends Controller
     }
 
     //With Vendor ID Redirect
-    public function withVendorIdRedirect($projectid, $vendor, $vendorrespid, $country) {
+    public function withVendorIdRedirect($projectid, $vendor, $country) {
+        //Vendor Resp ID
+        $vendorrespid = $_GET['id'];
         //Full Abbreviations Country
         $fcountry = "";
         switch ($country) {
