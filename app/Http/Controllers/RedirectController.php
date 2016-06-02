@@ -12,8 +12,6 @@ class RedirectController extends Controller
 {
     //Make the redirect according to the Project ID and Vendor ID
     public function redirect ($projectid,$vendor,$country = "") {
-        var_dump($vendor);
-        exit();
 
         //Full Abbreviations Country
         $fcountry = "";
