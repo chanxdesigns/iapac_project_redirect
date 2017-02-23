@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\ProjectLists;
+use Illuminate\Support\Facades\DB;
 
 class RedirectController extends Controller
 {
@@ -80,7 +82,13 @@ class RedirectController extends Controller
             $urlArray = explode("respid",$survey_link);
             $urlArray[0] = $urlArray[0].$uid;
             $survey_link = implode("",$urlArray);
-            return redirect()->away($survey_link);
+
+            // Add to db for tracking
+            $prestart = DB::table('survey_prestart')->insert(
+                ['user_id' => $uid, 'started_on' => Carbon::now()]
+            );
+
+            if ($prestart) return redirect()->away($survey_link);
 
         } else {
             /**
@@ -100,8 +108,11 @@ class RedirectController extends Controller
             $survey_link = implode("",$urlArray);
 
             // Add to db for tracking
-            $prestart = DB::
-            return redirect()->away($survey_link);
+            $prestart = DB::table('survey_prestart')->insert(
+                ['user_id' => $uid, 'started_on' => Carbon::now()]
+            );
+
+            if ($prestart) return redirect()->away($survey_link);
         }
     }
 
@@ -176,6 +187,13 @@ class RedirectController extends Controller
         $urlArray = explode("respid",$survey_link);
         $urlArray[0] = $urlArray[0].$vendorrespid;
         $survey_link = implode("",$urlArray);
-        return redirect()->away($survey_link);
+
+        // Add to db for tracking
+        $prestart = DB::table('survey_prestart')->insert(
+            ['user_id' => $vendorrespid, 'started_on' => Carbon::now()]
+        );
+
+        // Redirect if successfully inserted to DB
+        if ($prestart) return redirect()->away($survey_link);
     }
 }
