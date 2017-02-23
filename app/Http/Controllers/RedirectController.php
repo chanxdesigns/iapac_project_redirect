@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
 use App\ProjectLists;
 
 class RedirectController extends Controller
@@ -52,6 +50,18 @@ class RedirectController extends Controller
             case "UAE":
                 $fcountry = "UAE";
                 break;
+            case "KSA":
+                $fcountry = "Saudi Arabia";
+                break;
+            case "JO":
+                $fcountry = "Jordan";
+                break;
+            case "SA":
+                $fcountry = "South Africa";
+                break;
+            case "AUS":
+                $fcountry = "Australia";
+                break;
         }
 
         if (!empty($fcountry)) {
@@ -83,11 +93,14 @@ class RedirectController extends Controller
                 $survey_link = $k->{'Survey Link'};
             }
 
-            //Add id to the survey link
+            // Add id to the survey link
             $uid = uniqid().$vendor;
             $urlArray = explode("respid",$survey_link);
             $urlArray[0] = $urlArray[0].$uid;
             $survey_link = implode("",$urlArray);
+
+            // Add to db for tracking
+            $prestart = DB::
             return redirect()->away($survey_link);
         }
     }
@@ -134,6 +147,18 @@ class RedirectController extends Controller
                 break;
             case "UAE":
                 $fcountry = "UAE";
+                break;
+            case "KSA":
+                $fcountry = "Saudi Arabia";
+                break;
+            case "JO":
+                $fcountry = "Jordan";
+                break;
+            case "SA":
+                $fcountry = "South Africa";
+                break;
+            case "AUS":
+                $fcountry = "Australia";
                 break;
         }
 
