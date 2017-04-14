@@ -85,7 +85,7 @@ class RedirectController extends Controller
 
             // Add to db for tracking
             $prestart = DB::table('survey_prestart')->insert(
-                ['user_id' => $vendorrespid, 'vendor' => $vendor, 'country' => $fcountry, 'started_on' => Carbon::now()]
+                ['user_id' => $uid, 'vendor' => $vendor, 'country' => $fcountry, 'started_on' => Carbon::now()]
             );
 
             if ($prestart) return redirect()->away($survey_link);
