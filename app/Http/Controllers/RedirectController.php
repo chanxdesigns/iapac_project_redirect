@@ -64,6 +64,9 @@ class RedirectController extends Controller
             case "AUS":
                 $fcountry = "Australia";
                 break;
+            case "TW":
+                $fcountry = "Taiwan";
+                break;
         }
 
         if (!empty($fcountry)) {
@@ -171,6 +174,9 @@ class RedirectController extends Controller
             case "AUS":
                 $fcountry = "Australia";
                 break;
+            case "TW":
+                $fcountry = "Taiwan";
+                break;    
         }
 
         /***
