@@ -74,14 +74,11 @@ class RedirectController extends Controller
              * Only If Country Is Present
              */
             //Get Survey Link
-            dump($fcountry);
             $survey_link = "";
             $result = ProjectLists::where("Project ID", "=", $projectid)->where("Vendor", "=", $vendor)->where("Country", "=", $fcountry)->get();
             foreach ($result as $k) {
                 $survey_link = $k->{'Survey Link'};
             }
-            
-            dd($result);
 
             //Add id to the survey link
             $uid = uniqid().$vendor;
@@ -141,7 +138,7 @@ class RedirectController extends Controller
             case "PH":
                 $fcountry = "Philippines";
                 break;
-            case "INDO":
+            case "ID":
                 $fcountry = "Indonesia";
                 break;
             case "MY":
