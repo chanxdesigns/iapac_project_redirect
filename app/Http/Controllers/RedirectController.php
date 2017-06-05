@@ -28,7 +28,7 @@ class RedirectController extends Controller
             case "PH":
                 $fcountry = "Philippines";
                 break;
-            case "INDO":
+            case "ID":
                 $fcountry = "Indonesia";
                 break;
             case "MY":
