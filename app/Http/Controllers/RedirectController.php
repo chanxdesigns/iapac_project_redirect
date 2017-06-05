@@ -81,7 +81,7 @@ class RedirectController extends Controller
                 $survey_link = $k->{'Survey Link'};
             }
             
-            dd($result)
+            dd($result);
 
             //Add id to the survey link
             $uid = uniqid().$vendor;
