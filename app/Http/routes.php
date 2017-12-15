@@ -11,5 +11,8 @@
 |
 */
 
-Route::get('/survey/{projectid}/{vendor}/{country?}', 'RedirectController@redirect');
+// Vendor ID auto generate (Freelancers, Own teams .etc)
+Route::get('/survey/{projectid}/{vendor}/{country}', 'RedirectController@redirect');
+
+// ID provided by the contract vendors
 Route::get('/survey/{projectid}/{vendor}/{country}/lang/', 'RedirectController@withVendorIdRedirect');

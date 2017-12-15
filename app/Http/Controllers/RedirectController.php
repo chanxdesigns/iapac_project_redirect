@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class RedirectController extends Controller
 {
+    /**
+     * Get City
+     */
+    protected function getCity() {
+        $new_ip = explode(",", $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+        return unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$new_ip))["geoplugin_city"];
+    }
+
     //Make the redirect according to the Project ID and Vendor ID
     public function redirect ($projectid,$vendor,$country = "") {
 
@@ -88,7 +96,7 @@ class RedirectController extends Controller
 
             // Add to db for tracking
             $prestart = DB::table('survey_prestart')->insert(
-                ['user_id' => $uid, 'vendor' => $vendor, 'country' => $fcountry, 'started_on' => Carbon::now()]
+                ['user_id' => $uid, 'vendor' => $vendor, 'country' => $fcountry, 'city' => $this->getCity(), 'started_on' => Carbon::now()]
             );
 
             if ($prestart) return redirect()->away($survey_link);
@@ -112,7 +120,7 @@ class RedirectController extends Controller
 
             // Add to db for tracking
             $prestart = DB::table('survey_prestart')->insert(
-                ['user_id' => $vendorrespid, 'vendor' => $vendor, 'country' => $fcountry, 'started_on' => Carbon::now()]
+                ['user_id' => $vendorrespid, 'vendor' => $vendor, 'country' => $fcountry, 'city' => $this->getCity(), 'started_on' => Carbon::now()]
             );
 
             if ($prestart) return redirect()->away($survey_link);
@@ -196,7 +204,7 @@ class RedirectController extends Controller
 
         // Add to db for tracking
         $prestart = DB::table('survey_prestart')->insert(
-            ['user_id' => $vendorrespid, 'project_id' => $projectid, 'vendor' => $vendor, 'country' => $country, 'started_on' => Carbon::now()]
+            ['user_id' => $vendorrespid, 'project_id' => $projectid, 'vendor' => $vendor, 'country' => $country, 'city' => $this->getCity(), 'started_on' => Carbon::now()]
         );
 
         // Redirect if successfully inserted to DB
